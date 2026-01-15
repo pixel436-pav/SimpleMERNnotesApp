@@ -1,5 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import noteRoutes from './routes/noteRoutes.js'
 
 const app = express();
 dotenv.config();
@@ -7,6 +9,13 @@ dotenv.config();
 //JSON parsing middleware (provided by express)
 app.use(express.json());
 const PORT = process.env.PORT || 2008
+
+mongoose.connect(process.env.MongoDbURL)
+    .then(()=> console.log(`MongoDb Connected`))
+    .catch(err => console.log(`mongoDb error`,err));
+
+
+app.use('/api',noteRoutes)
 
 app.listen(PORT,() => {
 
