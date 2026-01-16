@@ -24,7 +24,6 @@ router.get('/notes', async (req,res,next) => {
     try {
         const notes = await Note.find()
         res.json(notes)
-        
     } catch (error) {
         res.status(500).json({message: error.message})
     }
