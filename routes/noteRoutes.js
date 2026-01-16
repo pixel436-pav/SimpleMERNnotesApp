@@ -20,4 +20,29 @@ router.post('/notes', async (req,res,next) => {
   
 })
 
+router.get('/notes', async (req,res,next) => {
+    try {
+        const notes = await Note.find()
+        res.json(notes)
+        
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+)
+
+router.delete('/notes/:id',async (req,res,next) => {
+  
+    try {
+        const noteDelete = await Note.findByIdAndDelete(req.params.id)
+        res.json({message: `Note Deleted`})
+        
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+
+
+
+})
+
 export default router;
